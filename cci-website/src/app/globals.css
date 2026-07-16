@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-h: 76px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis manages scroll; disable native smooth when Lenis is active */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  @apply bg-charcoal text-silver font-body antialiased;
+  overflow-x: hidden;
+}
+
+/* Intro splash: lock scroll while active; hide instantly for return visits
+   (the inline head script sets these classes before first paint = no flash). */
+html.intro-active,
+html.intro-active body {
+  overflow: hidden;
+}
+html.intro-done #cci-intro {
+  display: none !important;
+}
+
+/* #site-shell wrapper is retained in the layout but needs no transform — the
+   site sits fully visible beneath the loader and is revealed by the pixel
+   dissolve, so no scale/flash rules are required. */
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-display text-soft-white;
+  text-wrap: balance;
+}
+
+::selection {
+  background: rgba(201, 162, 74, 0.3);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0e0f12;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2f38;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a414c;
+}
+
+@layer components {
+  .container-cci {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+  }
+
+  .label-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-gold;
+  }
+
+  .heading-xl {
+    @apply font-display font-bold uppercase leading-[0.95] text-soft-white;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .heading-lg {
+    @apply font-display font-bold uppercase leading-[1] text-soft-white;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+  }
+
+  .heading-md {
+    @apply font-display font-semibold uppercase leading-tight text-soft-white;
+    font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  }
+
+  .body-lg {
+    @apply text-base leading-relaxed text-silver sm:text-lg;
+  }
+
+  /* Glass card */
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-white/10 bg-gunmetal/70 shadow-card;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-wide transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+  }
+  .btn-gold {
+    @apply btn bg-gold text-charcoal hover:bg-gold-bright hover:shadow-gold;
+  }
+  .btn-outline {
+    @apply btn border border-white/25 text-soft-white hover:border-gold hover:text-gold;
+  }
+  .btn-ghost {
+    @apply btn text-silver hover:text-soft-white;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gold-text {
+    @apply bg-gradient-to-r from-gold-bright to-gold bg-clip-text text-transparent;
+  }
+  .perspective {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* Reveal-on-scroll base state (progressively enhanced by JS) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect reduced motion: show everything, kill transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
