@@ -7,6 +7,9 @@ import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import JsonLd from "@/components/util/JsonLd";
+type ArticlePageProps = {
+  params: Promise<{ slug: string }>;
+};
 import {
   pageMeta,
   articleSchema,
@@ -20,13 +23,13 @@ export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const post = getPost(params.slug);
+export async function generateMetadata(
+  { params }: ArticlePageProps
+): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) return {};
+
   return pageMeta({
     title: post.title,
     description: post.excerpt,
@@ -35,8 +38,9 @@ export function generateMetadata({
   });
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) notFound();
 
   const related = blogPosts
