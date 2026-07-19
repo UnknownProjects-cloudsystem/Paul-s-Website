@@ -110,7 +110,7 @@ async function sendInquiryEmail(data: Payload) {
       from:
         process.env.INQUIRY_FROM_EMAIL ||
         "Caissie Canine Instruction <onboarding@resend.dev>",
-      to: [process.env.INQUIRY_TO_EMAIL || "hasszahra2020@gmail.com"],
+      to: [process.env.INQUIRY_TO_EMAIL || "Caissiecanineinstruction@gmail.com"],
       reply_to: clean(data.email),
       subject: `New CCI inquiry from ${clean(data.firstName)} ${clean(data.lastName)}`,
       text: buildText(data),
