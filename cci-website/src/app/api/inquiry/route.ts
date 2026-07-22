@@ -28,38 +28,125 @@ type Payload = Record<string, unknown> & {
   consent?: boolean;
 };
 
+function getValue(data: Payload, ...keys: string[]) {
+  for (const key of keys) {
+    const value = data[key];
+    if (value !== undefined && value !== null && String(value).trim() !== "") {
+      return String(value);
+    }
+  }
+
+  return "Not provided";
+}
+
+function escapeHtml(value: string) {
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[character] || character
+  );
+}
+
+function row(label: string, value: string) {
+  return `
+    <tr>
+      <td style="width: 38%; padding: 12px 14px; border: 1px solid #d1d5db; background: #f3f4f6; font-weight: 700; color: #1f2937;">
+        ${escapeHtml(label)}
+      </td>
+      <td style="padding: 12px 14px; border: 1px solid #d1d5db; color: #111827;">
+        ${escapeHtml(value)}
+      </td>
+    </tr>
+  `;
+}
+
+function buildEmailHtml(data: Payload) {
+  const name = `${getValue(data, "firstName")} ${getValue(data, "lastName")}`.trim();
+  const email = getValue(data, "email");
+
+  const emailLink =
+    email !== "Not provided"
+      ? `<a href="mailto:${escapeHtml(email)}" style="color: #2563eb;">${escapeHtml(email)}</a>`
+      : "Not provided";
+
+  return `
+    <!doctype html>
+    <html>
+      <body style="margin: 0; padding: 24px; background: #ffffff; font-family: Arial, Helvetica, sans-serif;">
+        <div style="max-width: 810px; margin: 0 auto;">
+          <h1 style="margin: 0 0 20px; font-size: 24px; color: #111827;">
+            New CCI Website Inquiry
+          </h1>
+
+          <table cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            ${row("Name", name)}
+            ${row("Phone", getValue(data, "phone"))}
+            <tr>
+              <td style="width: 38%; padding: 12px 14px; border: 1px solid #d1d5db; background: #f3f4f6; font-weight: 700; color: #1f2937;">
+                Email
+              </td>
+              <td style="padding: 12px 14px; border: 1px solid #d1d5db;">
+                ${emailLink}
+              </td>
+            </tr>
+            ${row("Full Address", getValue(data, "fullAddress", "address"))}
+            ${row("City / Town", getValue(data, "city", "town"))}
+            ${row("Preferred Contact", getValue(data, "preferredContact", "contactMethod"))}
+            ${row("Service Category", getValue(data, "serviceCategory", "category"))}
+            ${row("Service Type", getValue(data, "serviceType"))}
+            ${row("Dog's Name", getValue(data, "dogName"))}
+            ${row("Breed", getValue(data, "breed"))}
+            ${row("Age", getValue(data, "age"))}
+            ${row("Weight", getValue(data, "weight"))}
+            ${row("Gender", getValue(data, "gender"))}
+            ${row("Spayed / Neutered", getValue(data, "spayedNeutered", "spayed", "neutered"))}
+            ${row("Training Level", getValue(data, "trainingLevel"))}
+            ${row("Main Concern", getValue(data, "concern"))}
+            ${row("Message", getValue(data, "message"))}
+          </table>
+        </div>
+      </body>
+    </html>
+  `;
+}
+
 function buildEmailText(data: Payload) {
   return [
-    "New Caissie Canine Instruction Inquiry",
+    "New CCI Website Inquiry",
     "",
-    `Name: ${data.firstName ?? ""} ${data.lastName ?? ""}`.trim(),
-    `Phone: ${data.phone ?? "Not provided"}`,
-    `Email: ${data.email ?? "Not provided"}`,
-    `City: ${data.city ?? "Not provided"}`,
-    `Service: ${data.serviceType ?? "Not provided"}`,
-    `Dog: ${[data.breed, data.age, data.gender]
-      .filter(Boolean)
-      .join(", ") || "Not provided"}`,
-    `Concern: ${data.concern ?? "Not provided"}`,
-    "",
-    `Message: ${data.message ?? "No additional message"}`,
-    "",
-    `Submitted: ${new Date().toLocaleString("en-CA")}`,
+    `Name: ${getValue(data, "firstName")} ${getValue(data, "lastName")}`.trim(),
+    `Phone: ${getValue(data, "phone")}`,
+    `Email: ${getValue(data, "email")}`,
+    `Full Address: ${getValue(data, "fullAddress", "address")}`,
+    `City / Town: ${getValue(data, "city", "town")}`,
+    `Preferred Contact: ${getValue(data, "preferredContact", "contactMethod")}`,
+    `Service Category: ${getValue(data, "serviceCategory", "category")}`,
+    `Service Type: ${getValue(data, "serviceType")}`,
+    `Dog's Name: ${getValue(data, "dogName")}`,
+    `Breed: ${getValue(data, "breed")}`,
+    `Age: ${getValue(data, "age")}`,
+    `Weight: ${getValue(data, "weight")}`,
+    `Gender: ${getValue(data, "gender")}`,
+    `Spayed / Neutered: ${getValue(data, "spayedNeutered", "spayed", "neutered")}`,
+    `Training Level: ${getValue(data, "trainingLevel")}`,
+    `Main Concern: ${getValue(data, "concern")}`,
+    `Message: ${getValue(data, "message")}`,
   ].join("\n");
 }
 
-async function sendInquiryEmail(
-  text: string,
-  replyTo: string
-): Promise<void> {
+async function sendInquiryEmail(data: Payload) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.INQUIRY_FROM_EMAIL;
   const to = process.env.INQUIRY_TO_EMAIL;
 
   if (!apiKey || !from || !to) {
-    throw new Error(
-      "Missing RESEND_API_KEY, INQUIRY_FROM_EMAIL, or INQUIRY_TO_EMAIL"
-    );
+    throw new Error("Missing required email environment variables");
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -71,15 +158,15 @@ async function sendInquiryEmail(
     body: JSON.stringify({
       from,
       to: [to],
-      reply_to: replyTo,
-      subject: "New CCI Training Inquiry",
-      text,
+      reply_to: String(data.email),
+      subject: "New CCI Website Inquiry",
+      html: buildEmailHtml(data),
+      text: buildEmailText(data),
     }),
   });
 
   if (!response.ok) {
-    const details = await response.text().catch(() => "");
-    throw new Error(`Resend ${response.status}: ${details}`);
+    throw new Error(`Resend ${response.status}: ${await response.text()}`);
   }
 }
 
@@ -95,7 +182,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Honeypot: silently accept bot submissions without sending email.
   if (typeof data.company === "string" && data.company.trim() !== "") {
     return NextResponse.json({ ok: true });
   }
@@ -126,14 +212,10 @@ export async function POST(req: Request) {
   }
 
   try {
-    await sendInquiryEmail(buildEmailText(data), String(data.email));
-    console.log("[inquiry] Email delivered to Resend.");
+    await sendInquiryEmail(data);
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error(
-      "[inquiry] email delivery failed:",
-      error instanceof Error ? error.message : error
-    );
+    console.error("[inquiry] email delivery failed:", error);
 
     return NextResponse.json(
       { ok: false, error: "Unable to send inquiry" },
