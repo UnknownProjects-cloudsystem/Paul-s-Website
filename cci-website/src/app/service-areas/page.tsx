@@ -45,7 +45,6 @@ export default function ServiceAreasPage() {
       <section className="border-b border-white/10 bg-black pb-20 pt-32">
         <div className="container-cci">
           <SectionHeader
-            as="h1"
             eyebrow="Service Areas"
             title="Ontario Dog Training With Canada-Wide Virtual Support"
             intro="CCI provides real-world dog training throughout Ontario, with focused coverage in Durham Region, Toronto and the GTA. Virtual coaching is available across Canada when the training goal is suitable for remote instruction."
