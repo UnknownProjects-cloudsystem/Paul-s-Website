@@ -121,6 +121,7 @@ export default function AssessmentForm() {
 
   function validateStep(s: number): string | null {
     if (s === 0) {
+      if (!form.area.trim()) return "Please enter your full address.";
       if (!form.firstName.trim() || !form.lastName.trim())
         return "Please enter your first and last name.";
       if (!/^\S+@\S+\.\S+$/.test(form.email))
@@ -274,9 +275,14 @@ export default function AssessmentForm() {
           <Field label="City / Town" required>
             <input className={fieldBase} value={form.city} onChange={(e) => set("city", e.target.value)} placeholder="e.g. Oshawa" />
           </Field>
-          <Field label="General Area / Street">
-            <input className={fieldBase} value={form.area} onChange={(e) => set("area", e.target.value)} placeholder="Neighbourhood (optional)" />
-          </Field>
+          <Field label="Full Address" required>
+  <input
+    className={fieldBase}
+    value={form.area}
+    onChange={(e) => set("area", e.target.value)}
+    placeholder="e.g. 123 Main Street, Ajax, ON"
+  />
+</Field>
           <Field label="Preferred Contact Method">
             <select className={fieldBase} value={form.preferredContact} onChange={(e) => set("preferredContact", e.target.value)}>
               <option>Phone</option>
