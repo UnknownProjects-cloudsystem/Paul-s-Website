@@ -97,7 +97,7 @@ function buildEmailHtml(data: Payload) {
                 ${emailLink}
               </td>
             </tr>
-            ${row("Full Address", getValue(data, "fullAddress", "address"))}
+            ${row("Full Address", getValue(data, "fullAddress", "address", "area"))}
             ${row("City / Town", getValue(data, "city", "town"))}
             ${row("Preferred Contact", getValue(data, "preferredContact", "contactMethod"))}
             ${row("Service Category", getValue(data, "serviceCategory", "category"))}
@@ -125,7 +125,7 @@ function buildEmailText(data: Payload) {
     `Name: ${getValue(data, "firstName")} ${getValue(data, "lastName")}`.trim(),
     `Phone: ${getValue(data, "phone")}`,
     `Email: ${getValue(data, "email")}`,
-    `Full Address: ${getValue(data, "fullAddress", "address")}`,
+    `Full Address: ${getValue(data, "fullAddress", "address", "area")}`,
     `City / Town: ${getValue(data, "city", "town")}`,
     `Preferred Contact: ${getValue(data, "preferredContact", "contactMethod")}`,
     `Service Category: ${getValue(data, "serviceCategory", "category")}`,
