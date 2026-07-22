@@ -1,9 +1,19 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-"name": "paul-website",
+  "name": "paul-website",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-07-22",
   "compatibility_flags": ["nodejs_compat"],
+
+  // Keep runtime variables/secrets configured in the Cloudflare dashboard.
+  "keep_vars": true,
+
+  // These are safe plaintext runtime values.
+  "vars": {
+    "INQUIRY_FROM_EMAIL": "CCI Website <inquiries@caissiecanineinstruction.com>",
+    "INQUIRY_TO_EMAIL": "caissiecanineinstruction@gmail.com"
+  },
+
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
