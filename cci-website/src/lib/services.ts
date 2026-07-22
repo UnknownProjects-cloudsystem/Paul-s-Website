@@ -171,7 +171,8 @@ export const servicePages: Record<string, ServicePage> = {
     h1: "Private Training for Real-World Control",
     intro:
       "Programs built around your dog and your life. We don't just train the dog — we teach you to communicate, guide and maintain real-world behaviour long after the lesson ends.",
-    seoTitle: "Private Dog Training in Durham Region & the GTA",
+    seoTitle:
+      "Private Dog Training in Durham Region & the GTA | Caissie Canine Instruction",
     seoDescription:
       "Professional private dog training across Durham Region, Toronto and the GTA. Puppy foundations to advanced obedience and behaviour work from a retired police K9 instructor.",
     hero: "/assets/caissie/gallery/4.webp",
@@ -215,7 +216,7 @@ export const servicePages: Record<string, ServicePage> = {
     h1: "Puppy Foundations That Prevent Problems",
     intro:
       "The first months shape everything. We build confidence, focus and good habits early — so the behaviours you want become second nature and the problems you fear never take root.",
-    seoTitle: "Puppy Training in Durham Region & Ontario",
+    seoTitle: "Puppy Training in Durham Region & Ontario | Caissie Canine Instruction",
     seoDescription:
       "Professional puppy training in Durham Region, Toronto and the GTA. Socialization, focus, house manners and confident foundations from a retired police K9 instructor.",
     hero: "/assets/caissie/gallery/16.webp",
@@ -255,7 +256,8 @@ export const servicePages: Record<string, ServicePage> = {
     h1: "Behaviour Correction for Real-World Confidence",
     intro:
       "Reactivity, leash aggression, poor recall, fear, jumping and anxiety don't fix themselves. We diagnose the root cause and rebuild behaviour with the structure and consistency dogs depend on.",
-    seoTitle: "Dog Behaviour Training in Ontario & Durham Region",
+    seoTitle:
+      "Dog Behaviour Correction in Ontario | Reactive & Aggressive Dogs | CCI",
     seoDescription:
       "Behaviour training for reactive, aggressive, fearful or unruly dogs across Durham Region and the GTA. Root-cause correction from a retired police K9 instructor.",
     hero: "/assets/caissie/gallery/24.webp",
@@ -295,7 +297,8 @@ export const servicePages: Record<string, ServicePage> = {
     h1: "Modern, Humane E-Collar Training",
     intro:
       "A properly conditioned e-collar is a gentle, precise communication tool — not a shortcut or a punishment. Used correctly, it unlocks dependable off-leash freedom and safety.",
-    seoTitle: "Professional E-Collar Dog Training in Ontario",
+    seoTitle:
+      "Professional E-Collar Dog Training in Ontario | Caissie Canine Instruction",
     seoDescription:
       "Humane, professional e-collar training in Durham Region and the GTA. Low-level conditioning for reliable off-leash control from a retired police K9 instructor.",
     hero: "/assets/caissie/gallery/29.webp",
@@ -335,7 +338,8 @@ export const servicePages: Record<string, ServicePage> = {
     h1: "Service & Therapy Dog Training",
     intro:
       "Dogs that work in public and around vulnerable people need rock-solid temperament, manners and focus. We train candidates for the calm reliability these roles demand.",
-    seoTitle: "Service & Therapy Dog Training in Ontario",
+    seoTitle:
+      "Service Dog & Therapy Dog Training in Ontario | Caissie Canine Instruction",
     seoDescription:
       "Service dog and therapy dog training across Durham Region and the GTA. Task training, public-access manners and temperament work from a retired police K9 instructor.",
     hero: "/assets/caissie/gallery/12.webp",

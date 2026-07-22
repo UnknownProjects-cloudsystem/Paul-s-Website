@@ -4,30 +4,22 @@ import { site, serviceArea } from "./site";
 type PageMetaInput = {
   title: string;
   description: string;
-  path: string;
+  path: string; // e.g. "/about"
   image?: string;
-  robots?: Metadata["robots"];
 };
 
-const structuredServiceAreas = () => [
-  { "@type": "AdministrativeArea", name: "Ontario" },
-  ...serviceArea.cities.map((city) => ({ "@type": "City", name: city })),
-  { "@type": "Country", name: "Canada", description: "Virtual training" },
-];
-
+// Per-page metadata helper: unique title, description, canonical & OG.
 export function pageMeta({
   title,
   description,
   path,
   image,
-  robots,
 }: PageMetaInput): Metadata {
   const url = `${site.url}${path}`;
   const ogImage = image || site.ogImage;
   return {
     title,
     description,
-    robots,
     alternates: { canonical: url },
     openGraph: {
       title,
@@ -36,12 +28,7 @@ export function pageMeta({
       siteName: site.name,
       type: "website",
       locale: "en_CA",
-      images: [
-        {
-          url: ogImage,
-          alt: `${title} — ${site.name}`,
-        },
-      ],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: site.name }],
     },
     twitter: {
       card: "summary_large_image",
@@ -52,11 +39,15 @@ export function pageMeta({
   };
 }
 
-export function organizationSchema() {
+// ---------------------------------------------------------------------------
+// JSON-LD structured data
+// ---------------------------------------------------------------------------
+
+export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${site.url}/#organization`,
+    "@type": "LocalBusiness",
+    "@id": `${site.url}/#business`,
     name: site.name,
     description: site.description,
     url: site.url,
@@ -64,24 +55,22 @@ export function organizationSchema() {
     email: site.email,
     image: `${site.url}${site.ogImage}`,
     logo: `${site.url}${site.logo}`,
-    areaServed: structuredServiceAreas(),
+    priceRange: "$$",
+    areaServed: serviceArea.cities.map((c) => ({
+      "@type": "City",
+      name: c,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "ON",
+      addressCountry: "CA",
+    },
     founder: {
       "@type": "Person",
       name: site.founder,
       jobTitle: site.founderTitle,
     },
-  };
-}
-
-export function websiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${site.url}/#website`,
-    name: site.name,
-    url: site.url,
-    inLanguage: "en-CA",
-    publisher: { "@id": `${site.url}/#organization` },
+    sameAs: [] as string[],
   };
 }
 
@@ -91,9 +80,9 @@ export function personSchema() {
     "@type": "Person",
     name: site.founder,
     jobTitle: site.founderTitle,
-    worksFor: { "@id": `${site.url}/#organization` },
+    worksFor: { "@type": "Organization", name: site.name },
     description:
-      "Retired police sergeant and former chief canine instructor for the largest municipal K9 agency in Canada, providing private and corporate K9 training across Ontario.",
+      "Retired Sergeant and former police chief instructor with over 32 years of law-enforcement experience, providing private and corporate K9 training across Ontario.",
     url: `${site.url}/about`,
     image: `${site.url}/assets/caissie/paul/paul-3.webp`,
   };
@@ -110,8 +99,8 @@ export function serviceSchema(opts: {
     name: opts.name,
     description: opts.description,
     serviceType: opts.name,
-    provider: { "@id": `${site.url}/#organization` },
-    areaServed: structuredServiceAreas(),
+    provider: { "@type": "LocalBusiness", name: site.name, url: site.url },
+    areaServed: serviceArea.cities.join(", "),
     url: `${site.url}${opts.path}`,
   };
 }
@@ -132,11 +121,11 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    itemListElement: items.map((it, i) => ({
       "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: `${site.url}${item.path}`,
+      position: i + 1,
+      name: it.name,
+      item: `${site.url}${it.path}`,
     })),
   };
 }
@@ -155,15 +144,9 @@ export function articleSchema(opts: {
     description: opts.description,
     image: `${site.url}${opts.image}`,
     datePublished: opts.date,
-    dateModified: opts.date,
-    author: {
-      "@type": "Person",
-      name: site.founder,
-      url: `${site.url}/about`,
-    },
+    author: { "@type": "Person", name: site.founder },
     publisher: {
       "@type": "Organization",
-      "@id": `${site.url}/#organization`,
       name: site.name,
       logo: { "@type": "ImageObject", url: `${site.url}${site.logo}` },
     },

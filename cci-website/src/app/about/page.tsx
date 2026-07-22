@@ -9,12 +9,11 @@ import JsonLd from "@/components/util/JsonLd";
 import Icon from "@/components/ui/Icon";
 import { pageMeta, personSchema, breadcrumbSchema } from "@/lib/seo";
 import { stats, site } from "@/lib/site";
-import { imageBlurDataURL } from "@/lib/images";
 
 export const metadata: Metadata = pageMeta({
-  title: "About Paul Caissie — Former Police Chief Canine Instructor",
+  title: "About Paul Caissie — Retired Police K9 Instructor in Ontario",
   description:
-    "Meet retired police sergeant Paul Caissie, former chief canine instructor for the largest municipal K9 agency in Canada and now serving clients across Ontario.",
+    "Meet retired Sergeant Paul Caissie: 32+ years in law enforcement and a former police canine Chief Instructor, now training private and corporate clients across Ontario.",
   path: "/about",
   image: "/assets/caissie/paul/paul-3.webp",
 });
@@ -32,8 +31,8 @@ const credentials = [
   },
   {
     icon: "obedience",
-    title: "Former Police Chief Canine Instructor",
-    body: "Former chief canine instructor for the largest municipal K9 agency in Canada.",
+    title: "Former Chief Instructor",
+    body: "Oversaw police working canines and their handlers.",
   },
   {
     icon: "patrol",
@@ -73,8 +72,6 @@ export default function AboutPage() {
           fill
           priority
           sizes="100vw"
-          placeholder="blur"
-          blurDataURL={imageBlurDataURL}
           className="object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/40" />
@@ -89,12 +86,11 @@ export default function AboutPage() {
               <span className="gold-text">Police K9 Experience</span>
             </h1>
             <p className="body-lg mt-6 max-w-2xl">
-              As a retired police sergeant and former chief canine instructor for
-              the largest municipal K9 agency in Canada, Paul Caissie brings
-              decades of real-world law-enforcement and canine-training experience
-              to every client. He has worked with handlers, agencies, families and
-              organizations to build dependable K9 control through practical,
-              structured, real-world training.
+              Paul Caissie brings decades of real-world law-enforcement and
+              canine-training experience to every client. As a retired Sergeant
+              and former police chief instructor, Paul has worked with handlers,
+              agencies, families and organizations to build dependable K9 control
+              through practical, structured, real-world training.
             </p>
           </Reveal>
         </div>
@@ -147,9 +143,6 @@ export default function AboutPage() {
                 alt="Paul Caissie professional canine training certification"
                 width={900}
                 height={650}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                placeholder="blur"
-                blurDataURL={imageBlurDataURL}
                 className="h-full w-full object-cover"
               />
             </div>

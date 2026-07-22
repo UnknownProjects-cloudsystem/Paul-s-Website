@@ -12,15 +12,15 @@ export default function LegacyTimeline() {
           <Reveal key={m.name} delay={i * 60}>
             <div className="relative flex flex-col gap-6 sm:flex-row sm:pl-16">
               <span className="absolute left-2.5 top-6 hidden h-3 w-3 rounded-full bg-gold ring-4 ring-gold/20 sm:block" />
-              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-white/10 sm:w-64">
+              <div className="relative h-64 w-full shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),rgba(5,7,10,0.96)_72%)] shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:h-72 sm:w-64">
                 <Image
                   src={m.image}
                   alt={`${m.name}, ${m.role}`}
                   fill
                   sizes="(max-width: 640px) 100vw, 256px"
-                  className="object-cover"
+                  className="object-contain p-1.5"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5" />
               </div>
               <div className="sm:pt-2">
                 <p className="text-xs font-semibold uppercase tracking-label text-gold">

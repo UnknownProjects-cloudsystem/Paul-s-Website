@@ -6,7 +6,7 @@ import JsonLd from "@/components/util/JsonLd";
 import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Dog Training & Pet Care Partner Network",
+  title: "Partner Network — Trusted K9 & Pet Businesses",
   description:
     "The Caissie Canine Instruction partner network: trusted businesses in nutrition, grooming, wellness, security, boarding and working-dog support across Ontario.",
   path: "/partners",
@@ -24,7 +24,6 @@ export default function PartnersPage() {
       <section className="pt-32">
         <div className="container-cci">
           <SectionHeader
-            as="h1"
             eyebrow="Partner Network"
             title="The CCI Partner Network"
             intro="We're proud to work alongside trusted businesses across nutrition, grooming, wellness, security, boarding and working-dog support. Filter by category to explore the network."

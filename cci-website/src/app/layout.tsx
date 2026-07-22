@@ -8,7 +8,7 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import Analytics from "@/components/util/Analytics";
 import JsonLd from "@/components/util/JsonLd";
 import IntroOverlay from "@/components/intro/IntroOverlay";
-import { organizationSchema, websiteSchema } from "@/lib/seo";
+import { localBusinessSchema } from "@/lib/seo";
 
 // Runs before first paint: hide the intro instantly for return visits / reduced
 // motion (prevents any flash), otherwise lock scroll while the splash plays.
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} | Real-World K9 Training in Ontario`,
-    template: "%s | CCI",
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
@@ -37,21 +37,7 @@ export const metadata: Metadata = {
   creator: site.name,
   icons: { icon: site.logo, apple: site.logo },
   robots: { index: true, follow: true },
-  openGraph: {
-    title: site.name,
-    description: site.description,
-    url: site.url,
-    siteName: site.name,
-    locale: "en_CA",
-    type: "website",
-    images: [{ url: site.ogImage, alt: site.name }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.name,
-    description: site.description,
-    images: [site.ogImage],
-  },
+  alternates: { canonical: site.url },
 };
 
 export const viewport: Viewport = {
@@ -85,7 +71,7 @@ export default function RootLayout({
       </head>
       <body>
         <IntroOverlay />
-        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <JsonLd data={localBusinessSchema()} />
         <SmoothScroll />
         <div id="site-shell">
           <Navbar />

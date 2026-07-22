@@ -85,7 +85,7 @@ export default function IntroOverlay() {
     >
       <video
         ref={videoRef}
-        className={`h-full w-full object-cover transition-opacity duration-200 ${
+        className={`h-full w-full object-contain transition-opacity duration-200 sm:object-cover ${
           covered ? "opacity-0" : "opacity-100"
         }`}
         src={VIDEO}

@@ -7,9 +7,6 @@ import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import JsonLd from "@/components/util/JsonLd";
-type ArticlePageProps = {
-  params: Promise<{ slug: string }>;
-};
 import {
   pageMeta,
   articleSchema,
@@ -17,19 +14,18 @@ import {
   breadcrumbSchema,
 } from "@/lib/seo";
 import { blogPosts, getPost } from "@/lib/blog";
-import { imageBlurDataURL } from "@/lib/images";
 
 export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata(
-  { params }: ArticlePageProps
-): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPost(slug);
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const post = getPost(params.slug);
   if (!post) return {};
-
   return pageMeta({
     title: post.title,
     description: post.excerpt,
@@ -38,9 +34,8 @@ export async function generateMetadata(
   });
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { slug } = await params;
-  const post = getPost(slug);
+export default function ArticlePage({ params }: { params: { slug: string } }) {
+  const post = getPost(params.slug);
   if (!post) notFound();
 
   const related = blogPosts
@@ -76,8 +71,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             fill
             priority
             sizes="100vw"
-            placeholder="blur"
-            blurDataURL={imageBlurDataURL}
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
@@ -155,8 +148,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     alt={r.title}
                     fill
                     sizes="(max-width: 1024px) 50vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL={imageBlurDataURL}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

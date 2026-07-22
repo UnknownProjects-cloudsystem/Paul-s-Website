@@ -178,7 +178,7 @@ export default function AssessmentForm() {
     } catch {
       setStatus("error");
       setError(
-        "Something went wrong sending your inquiry. Please call us at 905 427 4142 or email Caissiecanineinstruction@gmail.com."
+        "Something went wrong sending your inquiry. Please call or text us at 905 427 4142."
       );
     }
   }
@@ -194,11 +194,11 @@ export default function AssessmentForm() {
         <h3 className="mt-6 heading-md">Inquiry Received</h3>
         <p className="mx-auto mt-3 max-w-md text-silver">
           Thank you, {form.firstName}. Your training inquiry has been sent and
-          Paul will be in touch shortly. For anything urgent, call{" "}
+          Paul will be in touch shortly. For anything urgent, call or text{" "}
           <a href="tel:+19054274142" className="text-gold">
             905 427 4142
           </a>
-          {" "}or email Caissiecanineinstruction@gmail.com.
+          .
         </p>
       </div>
     );
@@ -274,8 +274,8 @@ export default function AssessmentForm() {
           <Field label="City / Town" required>
             <input className={fieldBase} value={form.city} onChange={(e) => set("city", e.target.value)} placeholder="e.g. Oshawa" />
           </Field>
-          <Field label="Full Address">
-            <input className={fieldBase} value={form.area} onChange={(e) => set("area", e.target.value)} placeholder="Street address and postal code" />
+          <Field label="General Area / Street">
+            <input className={fieldBase} value={form.area} onChange={(e) => set("area", e.target.value)} placeholder="Neighbourhood (optional)" />
           </Field>
           <Field label="Preferred Contact Method">
             <select className={fieldBase} value={form.preferredContact} onChange={(e) => set("preferredContact", e.target.value)}>
@@ -284,7 +284,7 @@ export default function AssessmentForm() {
               <option>Email</option>
             </select>
           </Field>
-          <Field label="Service Category">
+          <Field label="Service Type">
             <select className={fieldBase} value={form.serviceCategory} onChange={(e) => set("serviceCategory", e.target.value)}>
               <option value="Private">Private (my own dog)</option>
               <option value="Corporate">Corporate / Working K9</option>

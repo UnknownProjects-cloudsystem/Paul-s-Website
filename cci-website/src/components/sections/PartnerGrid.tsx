@@ -37,9 +37,14 @@ export default function PartnerGrid() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {shown.map((p) => {
-          const content = (
-            <>
+        {shown.map((p) => (
+          <a
+            key={p.name}
+            href={p.href}
+            target={p.href.startsWith("http") ? "_blank" : undefined}
+            rel="noopener noreferrer"
+            className="card-surface group flex flex-col items-center gap-4 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
+          >
             <div className="flex h-20 w-full items-center justify-center rounded-lg bg-white/90 p-3">
               <Image
                 src={p.logo}
@@ -58,28 +63,8 @@ export default function PartnerGrid() {
               </p>
               <p className="mt-2 text-xs leading-relaxed text-fog">{p.blurb}</p>
             </div>
-            </>
-          );
-
-          return p.href.startsWith("http") ? (
-            <a
-              key={p.name}
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-surface group flex flex-col items-center gap-4 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
-            >
-              {content}
-            </a>
-          ) : (
-            <article
-              key={p.name}
-              className="card-surface flex flex-col items-center gap-4 p-6 text-center"
-            >
-              {content}
-            </article>
-          );
-        })}
+          </a>
+        ))}
       </div>
     </div>
   );

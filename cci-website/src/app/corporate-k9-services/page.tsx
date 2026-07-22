@@ -16,7 +16,7 @@ import {
 import { corporateServices } from "@/lib/services";
 
 export const metadata: Metadata = pageMeta({
-  title: "Corporate K9 Consultation & Evaluation in Ontario",
+  title: "Corporate K9 Services — Consultation, Evaluation & Certification | CCI",
   description:
     "Independent corporate K9 consultation, detector and patrol dog evaluation, and certification support from a retired police canine Chief Instructor serving Ontario.",
   path: "/corporate-k9-services",

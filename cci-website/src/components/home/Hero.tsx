@@ -122,7 +122,7 @@ export default function Hero() {
 
           <p className="hero-anim body-lg mt-6 max-w-2xl text-balance">
             Train with retired Sergeant {site.founder}, a former police chief
-            canine instructor with decades of real-world K9 experience. From family
+            instructor with decades of real-world K9 experience. From family
             obedience to corporate working-dog consultation, Caissie Canine
             Instruction helps owners, handlers and organizations build control,
             confidence and dependable canine behaviour.

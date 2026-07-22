@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { blogPosts, blogCategories } from "@/lib/blog";
 import { cn } from "@/lib/utils";
-import { imageBlurDataURL } from "@/lib/images";
 
 export default function BlogList() {
   const [cat, setCat] = useState<string>("All");
@@ -48,8 +47,6 @@ export default function BlogList() {
                 alt={post.title}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                placeholder="blur"
-                blurDataURL={imageBlurDataURL}
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <span className="absolute left-3 top-3 rounded-full bg-charcoal/80 px-3 py-1 text-[0.6rem] font-bold uppercase tracking-wide text-gold">

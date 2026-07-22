@@ -4,14 +4,14 @@ export const site = {
   name: "Caissie Canine Instruction",
   shortName: "CCI",
   tagline: "Train for the Real World",
-  domain: "caissiecanineinstruction.com",
+  domain: "caissiecanineinstruction.ca",
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://caissiecanineinstruction.com",
+    "https://caissiecanineinstruction.ca",
   description:
-    "Real-world dog training built on decades of police K9 experience. Led by retired Sergeant Paul Caissie, serving Ontario with Canada-wide virtual training.",
+    "Real-world canine training built on decades of police K9 experience. Led by retired Sergeant Paul Caissie, serving Durham Region, Toronto and the GTA.",
   founder: "Paul Caissie",
-  founderTitle: "Retired Police Sergeant & Former Police Chief Canine Instructor",
+  founderTitle: "Retired Sergeant & Former Police Canine Instructor",
   email: "Caissiecanineinstruction@gmail.com",
   phone: "905 427 4142",
   phoneHref: "+19054274142",
@@ -35,7 +35,7 @@ export const serviceArea = {
     "Clarington",
   ],
   blurb:
-    "Ontario-wide, including Durham Region, Toronto, the GTA and surrounding communities, with Canada-wide virtual training available.",
+    "Ontario-wide, including Durham Region, Toronto, the GTA, Markham, Mississauga and surrounding communities.",
 } as const;
 
 export type NavItem = {
@@ -79,7 +79,6 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "Corporate K9", href: "/corporate-k9-services" },
-  { label: "Service Areas", href: "/service-areas" },
   { label: "Partners", href: "/partners" },
   { label: "Knowledge Hub", href: "/k9-knowledge-hub" },
   { label: "Contact", href: "/contact" },
@@ -98,7 +97,6 @@ export const footerNav = {
     { label: "About Paul Caissie", href: "/about" },
     { label: "Success Stories", href: "/testimonials" },
     { label: "Partner Network", href: "/partners" },
-    { label: "Service Areas", href: "/service-areas" },
     { label: "K9 Knowledge Hub", href: "/k9-knowledge-hub" },
     { label: "K9 Legacy", href: "/legacy" },
     { label: "Contact", href: "/contact" },

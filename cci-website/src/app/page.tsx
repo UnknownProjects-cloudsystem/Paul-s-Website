@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/home/Hero";
@@ -14,15 +13,6 @@ import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
 import { stats } from "@/lib/site";
 import { privateServices, corporateServices } from "@/lib/services";
-import { pageMeta } from "@/lib/seo";
-import { imageBlurDataURL } from "@/lib/images";
-
-export const metadata: Metadata = pageMeta({
-  title: "Dog Training in Ontario & Durham Region",
-  description:
-    "Private and corporate dog training led by retired Sergeant Paul Caissie, serving Durham Region, Toronto, the GTA and Ontario with Canada-wide virtual support.",
-  path: "/",
-});
 
 export default function HomePage() {
   return (
@@ -56,10 +46,8 @@ export default function HomePage() {
                   alt="Retired Sergeant Paul Caissie, founder of Caissie Canine Instruction"
                   width={640}
                   height={760}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  placeholder="blur"
-                  blurDataURL={imageBlurDataURL}
                   className="h-full w-full object-cover"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 to-transparent" />
               </div>
@@ -69,12 +57,12 @@ export default function HomePage() {
             <SectionHeader
               eyebrow="About Paul Caissie"
               title="Built on Decades of Police K9 Experience"
-              intro="Paul Caissie brings decades of real-world law-enforcement and canine-training experience to every client. As a retired police sergeant and former police chief canine instructor, Paul has worked with handlers, agencies, families and organizations to build dependable K9 control through practical, structured, real-world training."
+              intro="Paul Caissie brings decades of real-world law-enforcement and canine-training experience to every client. As a retired Sergeant and former police chief instructor, Paul has worked with handlers, agencies, families and organizations to build dependable K9 control through practical, structured, real-world training."
             />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {[
                 "Retired Sergeant, 32+ years in law enforcement",
-                "Former Police Chief Canine Instructor",
+                "Former police canine Chief Instructor",
                 "Worked with K9 agencies across North America",
                 "Trains both the dog and the owner",
               ].map((c) => (

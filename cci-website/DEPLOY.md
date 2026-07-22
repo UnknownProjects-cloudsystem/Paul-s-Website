@@ -52,12 +52,13 @@ After this, every time you change the site and push, Vercel re-deploys automatic
 
 In the Vercel dashboard → your project → **Settings → Environment Variables**, add:
 
-| Name                    | Value                                           |
-| ----------------------- | ----------------------------------------------- |
-| `RESEND_API_KEY`        | (from your `.env.local`)                        |
-| `INQUIRY_TO_EMAIL`      | `hasszahra2020@gmail.com`                       |
-| `INQUIRY_FROM_EMAIL`    | your verified sender or Resend onboarding sender |
-| `NEXT_PUBLIC_SITE_URL`  | `https://caissiecanineinstruction.com`          |
+| Name                  | Value                                            |
+| --------------------- | ------------------------------------------------ |
+| `TWILIO_ACCOUNT_SID`  | (from your `.env.local`)                         |
+| `TWILIO_AUTH_TOKEN`   | (from your `.env.local`)                         |
+| `TWILIO_FROM_NUMBER`  | `+16477993621`                                   |
+| `OWNER_SMS_NUMBER`    | `+16475104080`                                   |
+| `NEXT_PUBLIC_SITE_URL`| `https://caissiecanineinstruction.ca`            |
 
 Then redeploy (Vercel → Deployments → … → Redeploy) so they take effect.
 
@@ -66,7 +67,7 @@ Then redeploy (Vercel → Deployments → … → Redeploy) so they take effect.
 ## Connect your domain
 
 Vercel → your project → **Settings → Domains** → add
-`caissiecanineinstruction.com`. Vercel shows you the DNS records to enter at
+`caissiecanineinstruction.ca`. Vercel shows you the DNS records to enter at
 whoever you bought the domain from (GoDaddy, Namecheap, etc.). Once DNS updates
 (can take a few minutes to a few hours), the site shows at your real address.
 

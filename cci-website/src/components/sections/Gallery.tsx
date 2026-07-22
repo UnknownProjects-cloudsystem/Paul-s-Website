@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { galleryImages } from "@/lib/gallery";
-import { imageBlurDataURL } from "@/lib/images";
 
 export default function Gallery({ limit }: { limit?: number }) {
   const images = limit ? galleryImages.slice(0, limit) : galleryImages;
@@ -30,11 +29,9 @@ export default function Gallery({ limit }: { limit?: number }) {
             <Image
               src={img.src}
               alt={img.alt}
-              width={img.width}
-              height={img.height}
+              width={500}
+              height={500}
               loading="lazy"
-              placeholder="blur"
-              blurDataURL={imageBlurDataURL}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -75,11 +72,8 @@ export default function Gallery({ limit }: { limit?: number }) {
             <Image
               src={images[active].src}
               alt={images[active].alt}
-              width={images[active].width}
-              height={images[active].height}
-              sizes="100vw"
-              placeholder="blur"
-              blurDataURL={imageBlurDataURL}
+              width={1400}
+              height={1000}
               className="max-h-[85vh] w-auto rounded-lg object-contain"
             />
           </div>

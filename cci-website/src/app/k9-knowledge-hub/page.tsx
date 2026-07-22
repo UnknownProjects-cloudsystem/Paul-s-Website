@@ -6,7 +6,7 @@ import JsonLd from "@/components/util/JsonLd";
 import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Ontario Dog Training & K9 Knowledge Hub",
+  title: "K9 Knowledge Hub — Dog Training Tips & Canine Care",
   description:
     "Practical dog training tips, puppy care, safety advice and working-dog insight from retired police K9 instructor Paul Caissie.",
   path: "/k9-knowledge-hub",
@@ -24,7 +24,6 @@ export default function KnowledgeHubPage() {
       <section className="pt-32">
         <div className="container-cci">
           <SectionHeader
-            as="h1"
             eyebrow="K9 Knowledge Hub"
             title="Training Tips & Canine Know-How"
             intro="Practical, no-nonsense advice on training, puppy care, safety and working dogs — straight from decades of real-world experience."

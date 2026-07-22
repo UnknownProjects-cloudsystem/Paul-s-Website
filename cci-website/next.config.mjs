@@ -6,7 +6,6 @@ const nextConfig = {
   transpilePackages: ["three"],
   images: {
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 2678400,
   },
   async headers() {
     return [
@@ -25,5 +24,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());

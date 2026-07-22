@@ -1,21 +1,17 @@
 "use client";
 
-import {
-  createElement,
-  useEffect,
-  useRef,
-  type ElementType,
-  type ReactNode,
-} from "react";
+import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
   as?: ElementType;
-  delay?: number;
+  delay?: number; // ms
 };
 
+// Lightweight scroll reveal using IntersectionObserver.
+// Reduced-motion users get content shown instantly (handled in globals.css).
 export default function Reveal({
   children,
   className,
@@ -43,17 +39,13 @@ export default function Reveal({
       },
       { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
     );
-
     io.observe(el);
     return () => io.disconnect();
   }, [delay]);
 
-  return createElement(
-    Tag,
-    {
-      ref: ref as never,
-      className: cn("reveal", className),
-    } as never,
-    children
+  return (
+    <Tag ref={ref as never} className={cn("reveal", className)}>
+      {children}
+    </Tag>
   );
 }

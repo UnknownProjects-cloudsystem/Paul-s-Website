@@ -23,16 +23,13 @@ export function SectionHeader({
   intro,
   align = "left",
   className,
-  as = "h2",
 }: {
   eyebrow?: string;
   title: string;
   intro?: string;
   align?: "left" | "center";
   className?: string;
-  as?: "h1" | "h2";
 }) {
-  const Heading = as;
   return (
     <Reveal
       className={cn(
@@ -47,7 +44,7 @@ export function SectionHeader({
           {eyebrow}
         </span>
       )}
-      <Heading className="heading-lg mt-4">{title}</Heading>
+      <h2 className="heading-lg mt-4">{title}</h2>
       {intro && <p className="body-lg mt-5">{intro}</p>}
     </Reveal>
   );
