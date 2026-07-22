@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const recent = new Map<string, number>();
 const DEDUPE_TTL_MS = 60_000;
+
 
 function isDuplicate(key: string) {
   const now = Date.now();
@@ -141,9 +143,15 @@ function buildEmailText(data: Payload) {
 }
 
 async function sendInquiryEmail(data: Payload) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.INQUIRY_FROM_EMAIL;
-  const to = process.env.INQUIRY_TO_EMAIL;
+ const env = getCloudflareContext().env as {
+  RESEND_API_KEY?: string;
+  INQUIRY_FROM_EMAIL?: string;
+  INQUIRY_TO_EMAIL?: string;
+};
+
+const apiKey = env.RESEND_API_KEY;
+const from = env.INQUIRY_FROM_EMAIL;
+const to = env.INQUIRY_TO_EMAIL;
 
   if (!apiKey || !from || !to) {
     throw new Error("Missing required email environment variables");
