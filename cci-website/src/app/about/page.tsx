@@ -150,7 +150,7 @@ export default function AboutPage() {
           <div>
             <SectionHeader
               eyebrow="The Approach"
-              title="Train the Dog. Teach the Owner."
+              title="BETTER BEHAVIOUR. STRONGER BONDS. LASTING RESULTS..."
               intro="CCI doesn't only train the dog. Paul trains the owner to understand, guide and maintain the dog's behaviour in real-world environments — the difference between a dog that performs in a lesson and one that's reliable for life."
             />
             <ul className="mt-6 space-y-3">
