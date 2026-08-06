@@ -92,7 +92,7 @@ export const partners: Partner[] = [
     blurb: "Working-dog training and canine performance specialists.",
   },
   {
-    name: "K9ine Crest",
+    name: "K9ine Security",
     category: "K9 Training",
     logo: "/assets/caissie/partners/k9ine-crest.avif",
     href: "#",
