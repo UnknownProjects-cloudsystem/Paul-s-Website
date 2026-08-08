@@ -11,9 +11,9 @@ import { pageMeta, personSchema, breadcrumbSchema } from "@/lib/seo";
 import { stats, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "About Paul Caissie — Retired Police K9 Instructor in Ontario",
+  title: "About Paul Caissie | Police K9 Instructor Ontario",
   description:
-    "Meet retired Sergeant Paul Caissie: 32+ years in law enforcement and a former police canine Chief Instructor, now training private and corporate clients across Ontario.",
+    "Meet Paul Caissie, a retired police sergeant and former chief canine instructor with decades of real-world K9 training experience across Ontario.",
   path: "/about",
   image: "/assets/caissie/paul/paul-3.webp",
 });
@@ -74,17 +74,21 @@ export default function AboutPage() {
           sizes="100vw"
           className="object-cover object-top"
         />
+
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/40" />
+
         <div className="container-cci relative z-10">
           <Reveal className="max-w-3xl">
             <span className="label-eyebrow">
               <span className="h-px w-6 bg-gold" />
               About {site.founder}
             </span>
+
             <h1 className="heading-xl mt-4">
               Built on Decades of{" "}
               <span className="gold-text">Police K9 Experience</span>
             </h1>
+
             <p className="body-lg mt-6 max-w-2xl">
               Paul Caissie brings decades of real-world law-enforcement and
               canine-training experience to every client. As a retired Sergeant
@@ -118,15 +122,22 @@ export default function AboutPage() {
           title="A Career Earned in the Field"
           intro="Authority that comes from real operational experience — not a weekend certificate."
         />
+
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {credentials.map((c, i) => (
-            <Reveal key={c.title} delay={(i % 3) * 60} className="card-surface p-6">
+            <Reveal
+              key={c.title}
+              delay={(i % 3) * 60}
+              className="card-surface p-6"
+            >
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold">
                 <Icon name={c.icon as never} />
               </span>
+
               <h3 className="mt-4 font-display text-lg font-semibold uppercase text-soft-white">
                 {c.title}
               </h3>
+
               <p className="mt-2 text-sm text-silver">{c.body}</p>
             </Reveal>
           ))}
@@ -147,12 +158,14 @@ export default function AboutPage() {
               />
             </div>
           </Reveal>
+
           <div>
             <SectionHeader
               eyebrow="The Approach"
               title="BETTER BEHAVIOUR. STRONGER BONDS. LASTING RESULTS..."
               intro="CCI doesn't only train the dog. Paul trains the owner to understand, guide and maintain the dog's behaviour in real-world environments — the difference between a dog that performs in a lesson and one that's reliable for life."
             />
+
             <ul className="mt-6 space-y-3">
               {[
                 "Structured, real-world methods over gimmicks",
@@ -160,16 +173,22 @@ export default function AboutPage() {
                 "Programs for families, handlers and organizations",
                 "Authority trusted in court and in the field",
               ].map((t) => (
-                <li key={t} className="flex items-start gap-3 text-sm text-silver">
+                <li
+                  key={t}
+                  className="flex items-start gap-3 text-sm text-silver"
+                >
                   <span className="mt-1 text-gold">
                     <Icon name="advanced" className="h-4 w-4" />
                   </span>
+
                   {t}
                 </li>
               ))}
             </ul>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/contact">Book a Training Assessment</Button>
+
               <Button href="/corporate-k9-services" variant="outline">
                 Corporate K9 Services
               </Button>
