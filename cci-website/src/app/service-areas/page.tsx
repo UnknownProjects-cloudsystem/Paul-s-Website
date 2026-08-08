@@ -7,7 +7,7 @@ import { breadcrumbSchema, pageMeta } from "@/lib/seo";
 import { serviceArea } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Dog Training Service Areas Across Ontario",
+  title: "Dog Training Across Ontario",
   description:
     "Caissie Canine Instruction serves Durham Region, Toronto, the GTA and communities across Ontario, with Canada-wide virtual dog training available.",
   path: "/service-areas",
@@ -59,7 +59,10 @@ export default function ServiceAreasPage() {
               <h2 className="font-display text-2xl font-semibold uppercase text-soft-white">
                 {item.title}
               </h2>
-              <p className="mt-3 leading-relaxed text-silver">{item.body}</p>
+
+              <p className="mt-3 leading-relaxed text-silver">
+                {item.body}
+              </p>
             </article>
           ))}
         </div>
@@ -71,6 +74,7 @@ export default function ServiceAreasPage() {
           title="Communities We Commonly Serve"
           intro="Your location is only one part of choosing the right program. Complete an assessment and CCI will confirm the most appropriate training format for your dog and goals."
         />
+
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {serviceArea.cities.map((city) => (
             <li
@@ -81,9 +85,12 @@ export default function ServiceAreasPage() {
             </li>
           ))}
         </ul>
+
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-fog">
-          Don&apos;t see your community listed? Contact CCI to discuss Ontario travel or Canada-wide virtual training.
+          Don&apos;t see your community listed? Contact CCI to discuss Ontario
+          travel or Canada-wide virtual training.
         </p>
+
         <Link href="/contact" className="btn-gold mt-8">
           Check Training Availability
         </Link>
