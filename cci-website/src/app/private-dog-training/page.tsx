@@ -10,8 +10,9 @@ import { servicePages, privateServices } from "@/lib/services";
 const page = servicePages["private-dog-training"];
 
 export const metadata: Metadata = pageMeta({
-  title: page.seoTitle,
-  description: page.seoDescription,
+  title: "Private Dog Training Ontario",
+  description:
+    "Private dog training across Ontario for obedience, behaviour, puppy development and real-world control with experienced one-on-one guidance.",
   path: "/private-dog-training",
   image: page.hero,
 });
