@@ -14,12 +14,12 @@ const businessId = `${baseUrl}/#business`;
 const personId = `${baseUrl}/about#paul-caissie`;
 
 /**
- * Converts either:
- *   "/about"
- *   "about"
- *   "https://example.com/about"
+ * Converts relative or absolute paths into a safe absolute URL.
  *
- * into a safe absolute URL.
+ * Examples:
+ * "/about"
+ * "about"
+ * "https://example.com/about"
  */
 function absoluteUrl(value: string): string {
   if (/^https?:\/\//i.test(value)) {
@@ -30,10 +30,7 @@ function absoluteUrl(value: string): string {
 }
 
 /**
- * Reusable geographic coverage for structured data.
- *
- * We declare Ontario as the primary administrative area and then
- * supplement it with the communities commonly served by CCI.
+ * Geographic service coverage used throughout structured data.
  */
 function areaServedSchema() {
   return [
@@ -41,6 +38,7 @@ function areaServedSchema() {
       "@type": "AdministrativeArea",
       name: "Ontario, Canada",
     },
+
     ...serviceArea.cities.map((city) => ({
       "@type": "City",
       name: city,
@@ -49,14 +47,14 @@ function areaServedSchema() {
 }
 
 /**
- * Per-page metadata helper.
+ * Per-page SEO metadata helper.
  *
  * Handles:
- * - page title
+ * - title
  * - meta description
  * - canonical URL
  * - Open Graph
- * - Twitter/X sharing metadata
+ * - Twitter/X metadata
  */
 export function pageMeta({
   title,
@@ -82,6 +80,7 @@ export function pageMeta({
       siteName: site.name,
       type: "website",
       locale: "en_CA",
+
       images: [
         {
           url: ogImage,
@@ -106,7 +105,7 @@ export function pageMeta({
 /**
  * Main Caissie Canine Instruction business entity.
  *
- * This should normally be rendered once globally in the root layout.
+ * Rendered globally from the root layout.
  */
 export function localBusinessSchema() {
   return {
@@ -127,6 +126,8 @@ export function localBusinessSchema() {
 
     priceRange: "$$",
 
+    sameAs: site.sameAs,
+
     areaServed: areaServedSchema(),
 
     address: {
@@ -146,11 +147,9 @@ export function localBusinessSchema() {
 }
 
 /**
- * Paul Caissie entity.
+ * Paul Caissie structured entity.
  *
- * Uses the same @id referenced by the business founder field so
- * search engines can understand that both pieces of structured data
- * describe the same person.
+ * Uses the same @id referenced by the LocalBusiness founder field.
  */
 export function personSchema() {
   return {
@@ -162,7 +161,7 @@ export function personSchema() {
     jobTitle: site.founderTitle,
 
     description:
-      "Retired Sergeant and former police chief instructor with over 32 years of law-enforcement experience, providing private and corporate K9 training across Ontario.",
+      "Retired Sergeant and former police canine Chief Instructor with over 32 years of law-enforcement experience, providing private and corporate K9 training across Ontario.",
 
     url: `${baseUrl}/about`,
 
@@ -178,7 +177,7 @@ export function personSchema() {
 }
 
 /**
- * Structured data for CCI service pages.
+ * Structured data for individual service pages.
  */
 export function serviceSchema(opts: {
   name: string;
@@ -212,10 +211,15 @@ export function serviceSchema(opts: {
 /**
  * FAQ structured data.
  *
- * Questions and answers must match content visible to users
+ * Questions and answers should match the visible FAQ content
  * on the corresponding page.
  */
-export function faqSchema(faqs: { q: string; a: string }[]) {
+export function faqSchema(
+  faqs: {
+    q: string;
+    a: string;
+  }[],
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
