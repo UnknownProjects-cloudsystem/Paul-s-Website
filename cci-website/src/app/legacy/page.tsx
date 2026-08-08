@@ -6,9 +6,9 @@ import JsonLd from "@/components/util/JsonLd";
 import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "K9 Legacy — Remembering Paul Caissie's Service Dogs",
+  title: "K9 Legacy & Service Dogs",
   description:
-    "A tribute to the police, detection and therapy dogs who served alongside Paul Caissie — Iron, Bandit, Baylis, Indiana Joan, Daisy and more.",
+    "Honouring the police, detection and therapy dogs who served alongside Paul Caissie, including Iron, Bandit, Baylis, Indiana Joan, Daisy and more.",
   path: "/legacy",
 });
 
