@@ -6,9 +6,9 @@ import JsonLd from "@/components/util/JsonLd";
 import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "K9 Knowledge Hub — Dog Training Tips & Canine Care",
+  title: "Dog Training Tips & K9 Knowledge Hub",
   description:
-    "Practical dog training tips, puppy care, safety advice and working-dog insight from retired police K9 instructor Paul Caissie.",
+    "Practical dog training tips, puppy care, canine safety and working-dog guidance from retired police K9 instructor Paul Caissie.",
   path: "/k9-knowledge-hub",
 });
 
@@ -21,6 +21,7 @@ export default function KnowledgeHubPage() {
           { name: "K9 Knowledge Hub", path: "/k9-knowledge-hub" },
         ])}
       />
+
       <section className="pt-32">
         <div className="container-cci">
           <SectionHeader
@@ -30,9 +31,11 @@ export default function KnowledgeHubPage() {
           />
         </div>
       </section>
+
       <Section className="pt-12">
         <BlogList />
       </Section>
+
       <CTABanner />
     </>
   );
