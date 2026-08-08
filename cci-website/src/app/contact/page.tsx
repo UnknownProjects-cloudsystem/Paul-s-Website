@@ -9,9 +9,9 @@ import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 import { site, serviceArea } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Contact CCI for a Dog Training Assessment",
+  title: "Book a Dog Training Assessment",
   description:
-    "Book a dog training assessment with Caissie Canine Instruction. Serving Durham Region, Toronto and the GTA. Call or text 905 427 4142.",
+    "Book a dog training assessment with Caissie Canine Instruction. Serving Durham Region, Toronto, the GTA and clients across Ontario.",
   path: "/contact",
 });
 
@@ -32,10 +32,13 @@ export default function ContactPage() {
               <span className="h-px w-6 bg-gold" />
               Contact · Training Assessment
             </span>
+
             <h1 className="heading-xl mt-4">Tell Us About Your Dog</h1>
+
             <p className="body-lg mt-5">
               The more we know, the better we can help. Complete the assessment
-              and Paul will be in touch — or call/text anytime for a faster reply.
+              and Paul will be in touch — or call/text anytime for a faster
+              reply.
             </p>
           </Reveal>
         </div>
@@ -52,10 +55,12 @@ export default function ContactPage() {
               <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold">
                 <Icon name="patrol" />
               </span>
+
               <span>
                 <span className="block text-xs uppercase tracking-wide text-fog">
                   Call
                 </span>
+
                 <span className="font-display text-lg font-semibold text-soft-white">
                   {site.phone}
                 </span>
@@ -66,6 +71,7 @@ export default function ContactPage() {
               <a href={`tel:${site.phoneHref}`} className="btn-gold">
                 Call Now
               </a>
+
               <a href={`sms:${site.phoneHref}`} className="btn-outline">
                 Text Us
               </a>
@@ -78,10 +84,12 @@ export default function ContactPage() {
               <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold">
                 <Icon name="consult" />
               </span>
+
               <span className="min-w-0">
                 <span className="block text-xs uppercase tracking-wide text-fog">
                   Email
                 </span>
+
                 <span className="block break-all font-medium text-soft-white">
                   {site.email}
                 </span>
@@ -94,14 +102,17 @@ export default function ContactPage() {
                   <span className="flex h-7 w-7 items-center justify-center rounded-md border border-gold/25 bg-gold/10">
                     <Icon name="shield" className="h-4 w-4" />
                   </span>
+
                   Service Area
                 </span>
+
                 <h2 className="mt-4 font-display text-xl font-semibold uppercase leading-tight text-soft-white sm:text-2xl">
                   Training Across Ontario &amp; Canada
                 </h2>
+
                 <p className="mt-3 text-sm leading-relaxed text-silver">
-                  In-person support throughout Ontario, with professional virtual
-                  training available nationwide.
+                  In-person support throughout Ontario, with professional
+                  virtual training available nationwide.
                 </p>
               </div>
 
@@ -132,9 +143,11 @@ export default function ContactPage() {
                     <span className="block text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-gold">
                       {item.label}
                     </span>
+
                     <strong className="mt-1.5 block font-display text-xs font-semibold uppercase leading-tight text-soft-white sm:text-sm">
                       {item.title}
                     </strong>
+
                     <span className="mt-1.5 block text-[0.62rem] leading-relaxed text-fog sm:text-[0.68rem]">
                       {item.body}
                     </span>
@@ -146,6 +159,7 @@ export default function ContactPage() {
                 <h3 className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-fog">
                   Popular In-Person Communities
                 </h3>
+
                 <ul className="mt-4 grid grid-cols-3 gap-x-3 gap-y-2.5">
                   {serviceArea.cities.map((city) => (
                     <li
@@ -160,9 +174,13 @@ export default function ContactPage() {
 
                 <div className="mt-5 flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
                   <span className="flex items-center gap-2 text-[0.68rem] text-fog sm:text-xs">
-                    <Icon name="consult" className="h-3.5 w-3.5 shrink-0 text-gold" />
+                    <Icon
+                      name="consult"
+                      className="h-3.5 w-3.5 shrink-0 text-gold"
+                    />
                     Ask about virtual training anywhere in Canada.
                   </span>
+
                   <Link
                     href="/service-areas"
                     className="shrink-0 text-[0.62rem] font-semibold uppercase tracking-wide text-gold transition-colors hover:text-gold-bright"
