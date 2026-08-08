@@ -1,7 +1,11 @@
-// K9 Knowledge Hub — SEO content. Six starter articles across core categories.
-// Add more posts by extending this array; pages render automatically.
+// K9 Knowledge Hub — SEO-focused educational content.
+// Add more posts by extending this array; article pages and sitemap entries
+// are generated automatically from this data.
 
-export type BlogSection = { heading?: string; paragraphs: string[] };
+export type BlogSection = {
+  heading?: string;
+  paragraphs: string[];
+};
 
 export type BlogPost = {
   slug: string;
@@ -11,9 +15,15 @@ export type BlogPost = {
   readingTime: string;
   date: string;
   image: string;
-  relatedService?: { label: string; href: string };
+  relatedService?: {
+    label: string;
+    href: string;
+  };
   body: BlogSection[];
-  faqs?: { q: string; a: string }[];
+  faqs?: {
+    q: string;
+    a: string;
+  }[];
 };
 
 export const blogCategories = [
@@ -29,215 +39,307 @@ export const blogCategories = [
 export const blogPosts: BlogPost[] = [
   {
     slug: "stop-leash-pulling",
+
     title: "How to Stop Leash Pulling for Good",
+
     category: "Dog Training",
+
     excerpt:
-      "Pulling on the leash is the number-one frustration owners bring to us. Here's the structured approach that actually fixes it.",
+      "Learn why dogs pull on leash and how structured, consistent training can build calmer walks, better engagement and reliable leash manners.",
+
     readingTime: "5 min read",
+
     date: "2025-09-12",
+
     image: "/assets/caissie/gallery/33.webp",
+
     relatedService: {
       label: "Private Dog Training",
       href: "/private-dog-training",
     },
+
     body: [
       {
         paragraphs: [
-          "A walk should be the best part of your dog's day — and yours. When your dog drags you down the street, it's stressful, it's unsafe, and it quietly erodes the relationship. The good news: leash pulling is one of the most fixable problems we see.",
+          "A walk should be the best part of your dog's day — and yours. When your dog drags you down the street, it's stressful, it's unsafe, and it quietly erodes the relationship. The good news: leash pulling is one of the most common training problems and can improve substantially with clear, consistent handling.",
         ],
       },
+
       {
         heading: "Why dogs pull",
+
         paragraphs: [
-          "Dogs pull because it works. Every time the leash goes tight and you take a step forward, you've just rewarded the pulling. Pulling isn't dominance — it's a habit you've accidentally reinforced, often hundreds of times.",
+          "Dogs pull because it works. Every time the leash goes tight and forward movement continues, the dog can learn that pulling gets them where they want to go. Pulling isn't automatically a sign of dominance — in many cases, it's simply a habit that has been reinforced over time.",
         ],
       },
+
       {
-        heading: "The fix: be more interesting than the environment",
+        heading: "The fix: build engagement with the handler",
+
         paragraphs: [
-          "Real loose-leash walking starts with your dog choosing to check in with you. We build value for staying near you, then add clear, consistent feedback the moment the leash tightens. Used correctly, tools like a properly fitted training collar make this communication crystal clear.",
-          "The key is consistency. A dog that's allowed to pull half the time will keep pulling, because the behaviour still pays off sometimes.",
+          "Reliable loose-leash walking starts with your dog learning that staying engaged with you is valuable. From there, clear and consistent feedback helps the dog understand what happens when the leash becomes tight and what behaviour keeps the walk moving smoothly.",
+          "Consistency matters. If pulling succeeds sometimes but not others, the behaviour can be much harder to change.",
         ],
       },
+
       {
-        heading: "Where most owners go wrong",
+        heading: "Where many owners go wrong",
+
         paragraphs: [
-          "They train in the quiet backyard, then expect it to hold on a busy street full of squirrels and other dogs. Real-world control has to be trained in the real world — gradually, around the distractions your dog actually struggles with.",
+          "Training only in a quiet backyard and then expecting the same behaviour on a busy street is a major jump in difficulty. Real-world control needs to be developed gradually around the distractions your dog actually encounters.",
         ],
       },
     ],
+
     faqs: [
       {
         q: "What's the best age to start leash training?",
-        a: "As early as possible — but it's never too late. Adult dogs learn loose-leash walking well with consistent structure.",
+        a: "As early as possible — but it's never too late. Adult dogs can also learn reliable loose-leash walking through consistent training and clear structure.",
       },
+
       {
         q: "Do I need special equipment?",
-        a: "The right equipment helps, but technique and consistency matter far more. We'll recommend what suits your specific dog.",
+        a: "Appropriate equipment can help, but technique, timing and consistency matter greatly. The right setup depends on the individual dog and training goal.",
       },
     ],
   },
+
   {
     slug: "puppy-socialization-window",
-    title: "The Puppy Socialization Window: Why the First Months Matter Most",
+
+    title: "Puppy Socialization: Why the First Months Matter",
+
     category: "Puppy Care",
+
     excerpt:
-      "There's a critical window early in your puppy's life that shapes their confidence forever. Here's how to use it well.",
+      "Learn why early puppy socialization matters and how thoughtful exposure to people, environments, sounds and experiences can build lasting confidence.",
+
     readingTime: "4 min read",
+
     date: "2025-08-20",
+
     image: "/assets/caissie/gallery/24.webp",
-    relatedService: { label: "Puppy Training", href: "/puppy-training" },
+
+    relatedService: {
+      label: "Puppy Training",
+      href: "/puppy-training",
+    },
+
     body: [
       {
         paragraphs: [
-          "Between roughly three and sixteen weeks of age, your puppy's brain is uniquely open to new experiences. What happens during this window has an outsized effect on the confident, well-adjusted adult dog they become.",
+          "During the early months of a puppy's development, the brain is especially receptive to new experiences. What happens during this period can strongly influence the confidence and adaptability the dog carries into adulthood.",
         ],
       },
+
       {
         heading: "Socialization isn't just meeting dogs",
+
         paragraphs: [
-          "Good socialization means calm, positive exposure to a wide range of sights, sounds, surfaces and situations — not overwhelming your puppy with chaos. Quality matters far more than quantity.",
+          "Good socialization means calm, appropriate exposure to a wide range of people, sights, sounds, surfaces and environments — not overwhelming a puppy with constant stimulation. The quality of each experience matters more than simply trying to expose the puppy to as many things as possible.",
         ],
       },
+
       {
-        heading: "Structure prevents problems",
+        heading: "Structure helps prevent problems",
+
         paragraphs: [
-          "The habits you build now — settling calmly, focusing on you, handling new environments — are the foundation everything else is built on. Skipping this stage is the most common reason behaviour problems show up later.",
+          "The habits developed early — settling calmly, paying attention to the handler and navigating unfamiliar environments — create a foundation for later obedience and behaviour work.",
         ],
       },
     ],
+
     faqs: [
       {
         q: "Is it too late if my puppy is already 5 months old?",
-        a: "No. The early window is ideal, but confidence-building and training continue to work well past it. Start now.",
+        a: "No. Early development is important, but confidence-building, socialization and training continue well beyond the first few months. Starting now is still worthwhile.",
       },
     ],
   },
+
   {
     slug: "winter-paw-care",
-    title: "Winter Paw Care: Protecting Your Dog in Ontario Cold",
+
+    title: "Winter Paw Care for Dogs in Ontario",
+
     category: "Seasonal Pet Care",
+
     excerpt:
-      "Salt, ice and freezing temperatures are hard on paws. A few simple habits keep your dog comfortable all winter.",
+      "Protect your dog's paws from Ontario winter conditions with practical tips for road salt, ice, cold surfaces and post-walk paw care.",
+
     readingTime: "3 min read",
+
     date: "2025-12-01",
+
     image: "/assets/caissie/gallery/13.webp",
+
     body: [
       {
         paragraphs: [
-          "Ontario winters are tough on dogs' feet. Road salt, ice balls between the toes and frozen pavement can cause real discomfort and cracked pads.",
+          "Ontario winters can be hard on dogs' feet. Road salt, ice buildup and prolonged contact with very cold surfaces may cause irritation and discomfort.",
         ],
       },
+
       {
         heading: "Simple protective habits",
+
         paragraphs: [
-          "Wipe paws after every walk to remove salt and de-icer, keep the fur between pads trimmed, and consider a paw balm or booties for very cold days. Watch for limping or licking, which can signal irritation.",
+          "Wipe and inspect your dog's paws after winter walks, remove accumulated ice and de-icing residue, and keep excess fur between the paw pads maintained. Depending on the dog and conditions, protective paw products or properly fitted boots may also help.",
+          "Watch for repeated paw lifting, licking, redness or discomfort after walks and adjust the duration or conditions of outdoor activity when necessary.",
         ],
       },
+
       {
         heading: "Keep training going",
+
         paragraphs: [
-          "Cold weather is no reason to lose progress. Shorter, focused sessions indoors keep your dog's obedience sharp until spring.",
+          "Cold weather doesn't have to stop training progress. Short indoor sessions can reinforce obedience, engagement and impulse control until outdoor conditions improve.",
         ],
       },
     ],
   },
+
   {
     slug: "is-e-collar-training-humane",
+
     title: "Is E-Collar Training Humane? A Straight Answer",
+
     category: "Dog Training",
+
     excerpt:
-      "E-collars are widely misunderstood. Here's what modern, professional e-collar training actually involves.",
+      "Understand how modern e-collar training is approached, why conditioning and handler education matter, and what responsible use should involve.",
+
     readingTime: "5 min read",
+
     date: "2025-07-15",
+
     image: "/assets/caissie/gallery/29.webp",
-    relatedService: { label: "E-Collar Training", href: "/e-collar-training" },
+
+    relatedService: {
+      label: "E-Collar Training",
+      href: "/e-collar-training",
+    },
+
     body: [
       {
         paragraphs: [
-          "Few tools generate as much debate as the e-collar. Much of the controversy comes from outdated devices and improper use — not from how modern e-collars are used by professionals.",
+          "Few dog-training tools generate as much debate as the e-collar. Opinions vary widely, and outcomes depend heavily on the equipment, the individual dog, the trainer's method and how the tool is introduced and used.",
         ],
       },
+
       {
-        heading: "What modern e-collars actually do",
+        heading: "What modern e-collars do",
+
         paragraphs: [
-          "Today's quality e-collars deliver low-level stimulation a dog perceives as a light tap or vibration — far below anything painful. Conditioned correctly, the dog learns it as a clear, neutral communication signal, much like a tap on the shoulder.",
+          "Modern electronic training collars provide adjustable stimulation intended to create a clear remote cue. The dog's response can vary depending on the device, fit, setting, environment and individual sensitivity, which is why careful introduction and observation are important.",
         ],
       },
+
       {
-        heading: "The difference is the conditioning",
+        heading: "Conditioning and handler education matter",
+
         paragraphs: [
-          "A responsible program introduces the collar at the lowest level the dog can perceive, pairs it with commands the dog already knows, and never uses it to frighten or punish. Owner education is essential — which is why we teach you exactly how and when to use it.",
+          "Responsible training should begin conservatively, connect the collar to behaviours the dog already understands, and avoid using the tool in a way that creates fear or distress. Handler education is essential because timing, consistency and understanding the dog's response all affect the outcome.",
         ],
       },
     ],
+
     faqs: [
       {
         q: "Will my dog be scared of the collar?",
-        a: "Not when it's conditioned properly. Done right, e-collar training builds confidence and off-leash freedom rather than fear.",
+        a: "The goal of responsible conditioning is not to create fear. The dog's behaviour and comfort should be monitored throughout training, and the approach should be adjusted if the dog shows signs of distress.",
       },
     ],
   },
+
   {
     slug: "reactive-dog-on-walks",
-    title: "What to Do With a Reactive Dog on Walks",
+
+    title: "Reactive Dog on Walks: What to Do",
+
     category: "Dog Training",
+
     excerpt:
-      "Lunging and barking at other dogs is exhausting and embarrassing. Here's how to start turning it around.",
+      "Learn how engagement, distance, structured handling and gradual exposure can help improve barking, lunging and over-arousal during walks.",
+
     readingTime: "6 min read",
+
     date: "2025-06-10",
+
     image: "/assets/caissie/gallery/5.webp",
-    relatedService: { label: "Behaviour Training", href: "/behaviour-training" },
+
+    relatedService: {
+      label: "Behaviour Training",
+      href: "/behaviour-training",
+    },
+
     body: [
       {
         paragraphs: [
-          "If your dog barks, lunges or spins at the end of the leash when they see another dog, you have a reactive dog — and you are not alone. Reactivity is one of the most common issues we help owners resolve.",
+          "If your dog regularly barks, lunges or becomes difficult to control when another dog appears during a walk, you're dealing with reactive behaviour. Reactivity is one of the most common challenges owners seek professional help for.",
         ],
       },
+
       {
-        heading: "Reactivity is usually rooted in stress",
+        heading: "Reactivity can have different causes",
+
         paragraphs: [
-          "Most reactive dogs aren't 'aggressive' — they're over-aroused, frustrated or fearful, and they've learned that big displays make the scary thing go away. Punishing the outburst without addressing the underlying state rarely works.",
+          "Reactive behaviour may involve fear, frustration, over-arousal, learned responses or a combination of factors. Understanding what is driving the behaviour is important because simply reacting to the outburst without addressing the underlying pattern may not create lasting improvement.",
         ],
       },
+
       {
-        heading: "Build focus before you build distance",
+        heading: "Build focus before reducing distance",
+
         paragraphs: [
-          "The goal is a dog that looks to you for direction instead of fixating on the trigger. That starts with rock-solid engagement at a distance where your dog can still think, then gradually closing the gap as control improves.",
-          "This is patient, structured work — and it's exactly the kind of real-world behaviour change a professional can accelerate.",
+          "The goal is to develop a dog that can remain responsive to the handler instead of becoming completely fixated on a trigger. Training often begins at a distance where the dog can still think and respond, with difficulty increased gradually as control improves.",
+          "Behaviour change takes repetition and consistency. Structured professional guidance can help owners determine appropriate distances, timing and progression for the individual dog.",
         ],
       },
     ],
   },
+
   {
     slug: "what-makes-a-good-working-dog",
+
     title: "What Makes a Good Working Dog?",
+
     category: "Working Dogs",
+
     excerpt:
-      "Not every dog is cut out for detection, patrol or protection work. Here's what professionals look for.",
+      "Learn what professionals evaluate when selecting dogs for detection, patrol and other working roles, including drive, stability and trainability.",
+
     readingTime: "5 min read",
+
     date: "2025-05-22",
+
     image: "/assets/caissie/gallery/2.webp",
+
     relatedService: {
       label: "Corporate K9 Services",
       href: "/corporate-k9-services",
     },
+
     body: [
       {
         paragraphs: [
-          "Whether for police, security or detection, a true working dog needs a specific blend of traits. Selecting the wrong dog is one of the most expensive mistakes an organization can make.",
+          "Whether the role involves police, security or detection work, a working dog needs an appropriate combination of temperament, drive, physical capability and trainability. Selecting a poor match can create substantial training and operational challenges later.",
         ],
       },
+
       {
         heading: "Drive, nerve and trainability",
+
         paragraphs: [
-          "Working dogs need strong, appropriate drive to engage with the task, the nerve strength to stay clear-headed under pressure, and the trainability to take direction reliably. A weakness in any one of these can compromise the whole team.",
+          "Working dogs need appropriate motivation to engage with the task, enough environmental stability to remain functional under pressure, and the trainability to take direction consistently. Weakness in one area can significantly affect overall suitability for a particular role.",
         ],
       },
+
       {
-        heading: "Selection is half the battle",
+        heading: "Selection is a critical first step",
+
         paragraphs: [
-          "Honest evaluation before you invest in training saves time, money and risk. An independent assessment from someone with real operational experience is invaluable — which is exactly what corporate K9 consultation provides.",
+          "Careful evaluation before investing heavily in training can reduce wasted time, cost and operational risk. Independent assessment from someone with practical working-dog experience can provide another perspective when selecting or evaluating a canine team.",
         ],
       },
     ],
@@ -245,5 +347,5 @@ export const blogPosts: BlogPost[] = [
 ];
 
 export function getPost(slug: string) {
-  return blogPosts.find((p) => p.slug === slug);
+  return blogPosts.find((post) => post.slug === slug);
 }
