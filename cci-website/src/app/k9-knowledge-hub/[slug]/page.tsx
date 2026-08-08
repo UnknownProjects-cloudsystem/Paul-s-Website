@@ -16,7 +16,9 @@ import {
 import { blogPosts, getPost } from "@/lib/blog";
 
 export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
+  return blogPosts.map((p) => ({
+    slug: p.slug,
+  }));
 }
 
 export function generateMetadata({
@@ -25,21 +27,46 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   const post = getPost(params.slug);
-  if (!post) return {};
-  return pageMeta({
+
+  if (!post) {
+    return {};
+  }
+
+  const meta = pageMeta({
     title: post.title,
     description: post.excerpt,
     path: `/k9-knowledge-hub/${post.slug}`,
     image: post.image,
   });
+
+  return {
+    ...meta,
+
+    // Prevent the root title template from adding
+    // "| Caissie Canine Instruction" to long article headlines.
+    title: {
+      absolute: post.title,
+    },
+  };
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
+export default function ArticlePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = getPost(params.slug);
-  if (!post) notFound();
+
+  if (!post) {
+    notFound();
+  }
 
   const related = blogPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .filter(
+      (p) =>
+        p.slug !== post.slug &&
+        p.category === post.category
+    )
     .slice(0, 3);
 
   return (
@@ -53,11 +80,24 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             image: post.image,
             date: post.date,
           }),
-          ...(post.faqs ? [faqSchema(post.faqs)] : []),
+
+          ...(post.faqs
+            ? [faqSchema(post.faqs)]
+            : []),
+
           breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "K9 Knowledge Hub", path: "/k9-knowledge-hub" },
-            { name: post.title, path: `/k9-knowledge-hub/${post.slug}` },
+            {
+              name: "Home",
+              path: "/",
+            },
+            {
+              name: "K9 Knowledge Hub",
+              path: "/k9-knowledge-hub",
+            },
+            {
+              name: post.title,
+              path: `/k9-knowledge-hub/${post.slug}`,
+            },
           ]),
         ]}
       />
@@ -73,7 +113,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             sizes="100vw"
             className="object-cover"
           />
+
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
+
           <div className="container-cci relative z-10 pb-12">
             <Link
               href="/k9-knowledge-hub"
@@ -81,24 +123,37 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             >
               ← K9 Knowledge Hub
             </Link>
+
             <p className="mt-4 text-xs font-semibold uppercase tracking-label text-gold">
               {post.category} · {post.readingTime}
             </p>
-            <h1 className="heading-lg mt-2 max-w-3xl">{post.title}</h1>
+
+            <h1 className="heading-lg mt-2 max-w-3xl">
+              {post.title}
+            </h1>
           </div>
         </section>
 
         <Section>
           <div className="mx-auto max-w-2xl">
-            <p className="body-lg font-medium text-soft-white">{post.excerpt}</p>
+            <p className="body-lg font-medium text-soft-white">
+              {post.excerpt}
+            </p>
+
             <div className="mt-8 space-y-8">
               {post.body.map((sec, i) => (
                 <Reveal key={i}>
                   {sec.heading && (
-                    <h2 className="heading-md mb-3">{sec.heading}</h2>
+                    <h2 className="heading-md mb-3">
+                      {sec.heading}
+                    </h2>
                   )}
+
                   {sec.paragraphs.map((p, j) => (
-                    <p key={j} className="mb-4 leading-relaxed text-silver">
+                    <p
+                      key={j}
+                      className="mb-4 leading-relaxed text-silver"
+                    >
                       {p}
                     </p>
                   ))}
@@ -112,6 +167,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 <p className="text-sm text-silver">
                   Ready to put this into practice with professional help?
                 </p>
+
                 <div className="mt-4">
                   <Button href={post.relatedService.href}>
                     Explore {post.relatedService.label}
@@ -123,7 +179,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             {/* FAQ */}
             {post.faqs && post.faqs.length > 0 && (
               <div className="mt-12">
-                <h2 className="heading-md mb-5">Frequently Asked</h2>
+                <h2 className="heading-md mb-5">
+                  Frequently Asked
+                </h2>
+
                 <FAQAccordion faqs={post.faqs} />
               </div>
             )}
@@ -134,7 +193,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       {/* Related posts */}
       {related.length > 0 && (
         <Section className="bg-ink">
-          <h2 className="heading-md mb-8">More on {post.category}</h2>
+          <h2 className="heading-md mb-8">
+            More on {post.category}
+          </h2>
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((r) => (
               <Link
@@ -151,10 +213,12 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
+
                 <div className="p-5">
                   <h3 className="font-display text-base font-semibold uppercase text-soft-white">
                     {r.title}
                   </h3>
+
                   <p className="mt-2 text-xs uppercase tracking-wide text-fog">
                     {r.readingTime}
                   </p>
