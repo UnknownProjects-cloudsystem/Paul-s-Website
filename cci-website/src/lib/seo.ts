@@ -4,23 +4,77 @@ import { site, serviceArea } from "./site";
 type PageMetaInput = {
   title: string;
   description: string;
-  path: string; // e.g. "/about"
+  path: string;
   image?: string;
 };
 
-// Per-page metadata helper: unique title, description, canonical & OG.
+const baseUrl = site.url.replace(/\/+$/, "");
+
+const businessId = `${baseUrl}/#business`;
+const personId = `${baseUrl}/about#paul-caissie`;
+
+/**
+ * Converts either:
+ *   "/about"
+ *   "about"
+ *   "https://example.com/about"
+ *
+ * into a safe absolute URL.
+ */
+function absoluteUrl(value: string): string {
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  return `${baseUrl}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
+/**
+ * Reusable geographic coverage for structured data.
+ *
+ * We declare Ontario as the primary administrative area and then
+ * supplement it with the communities commonly served by CCI.
+ */
+function areaServedSchema() {
+  return [
+    {
+      "@type": "AdministrativeArea",
+      name: "Ontario, Canada",
+    },
+    ...serviceArea.cities.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
+  ];
+}
+
+/**
+ * Per-page metadata helper.
+ *
+ * Handles:
+ * - page title
+ * - meta description
+ * - canonical URL
+ * - Open Graph
+ * - Twitter/X sharing metadata
+ */
 export function pageMeta({
   title,
   description,
   path,
   image,
 }: PageMetaInput): Metadata {
-  const url = `${site.url}${path}`;
-  const ogImage = image || site.ogImage;
+  const url = absoluteUrl(path);
+  const ogImage = absoluteUrl(image || site.ogImage);
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+
+    alternates: {
+      canonical: url,
+    },
+
     openGraph: {
       title,
       description,
@@ -28,8 +82,14 @@ export function pageMeta({
       siteName: site.name,
       type: "website",
       locale: "en_CA",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: site.name }],
+      images: [
+        {
+          url: ogImage,
+          alt: `${title} | ${site.name}`,
+        },
+      ],
     },
+
     twitter: {
       card: "summary_large_image",
       title,
@@ -43,93 +103,160 @@ export function pageMeta({
 // JSON-LD structured data
 // ---------------------------------------------------------------------------
 
+/**
+ * Main Caissie Canine Instruction business entity.
+ *
+ * This should normally be rendered once globally in the root layout.
+ */
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${site.url}/#business`,
+    "@id": businessId,
+
     name: site.name,
     description: site.description,
-    url: site.url,
+
+    url: baseUrl,
+
     telephone: site.phone,
     email: site.email,
-    image: `${site.url}${site.ogImage}`,
-    logo: `${site.url}${site.logo}`,
+
+    image: absoluteUrl(site.ogImage),
+    logo: absoluteUrl(site.logo),
+
     priceRange: "$$",
-    areaServed: serviceArea.cities.map((c) => ({
-      "@type": "City",
-      name: c,
-    })),
+
+    areaServed: areaServedSchema(),
+
     address: {
       "@type": "PostalAddress",
       addressRegion: "ON",
       addressCountry: "CA",
     },
+
     founder: {
       "@type": "Person",
+      "@id": personId,
       name: site.founder,
       jobTitle: site.founderTitle,
+      url: `${baseUrl}/about`,
     },
-    sameAs: [] as string[],
   };
 }
 
+/**
+ * Paul Caissie entity.
+ *
+ * Uses the same @id referenced by the business founder field so
+ * search engines can understand that both pieces of structured data
+ * describe the same person.
+ */
 export function personSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": personId,
+
     name: site.founder,
     jobTitle: site.founderTitle,
-    worksFor: { "@type": "Organization", name: site.name },
+
     description:
       "Retired Sergeant and former police chief instructor with over 32 years of law-enforcement experience, providing private and corporate K9 training across Ontario.",
-    url: `${site.url}/about`,
-    image: `${site.url}/assets/caissie/paul/paul-3.webp`,
+
+    url: `${baseUrl}/about`,
+
+    image: `${baseUrl}/assets/caissie/paul/paul-3.webp`,
+
+    worksFor: {
+      "@type": "LocalBusiness",
+      "@id": businessId,
+      name: site.name,
+      url: baseUrl,
+    },
   };
 }
 
+/**
+ * Structured data for CCI service pages.
+ */
 export function serviceSchema(opts: {
   name: string;
   description: string;
   path: string;
 }) {
+  const url = absoluteUrl(opts.path);
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${url}#service`,
+
     name: opts.name,
     description: opts.description,
     serviceType: opts.name,
-    provider: { "@type": "LocalBusiness", name: site.name, url: site.url },
-    areaServed: serviceArea.cities.join(", "),
-    url: `${site.url}${opts.path}`,
+
+    url,
+
+    provider: {
+      "@type": "LocalBusiness",
+      "@id": businessId,
+      name: site.name,
+      url: baseUrl,
+    },
+
+    areaServed: areaServedSchema(),
   };
 }
 
+/**
+ * FAQ structured data.
+ *
+ * Questions and answers must match content visible to users
+ * on the corresponding page.
+ */
 export function faqSchema(faqs: { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
+      name: faq.q,
+
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
     })),
   };
 }
 
-export function breadcrumbSchema(items: { name: string; path: string }[]) {
+/**
+ * Breadcrumb structured data.
+ */
+export function breadcrumbSchema(
+  items: {
+    name: string;
+    path: string;
+  }[],
+) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((it, i) => ({
+
+    itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      position: i + 1,
-      name: it.name,
-      item: `${site.url}${it.path}`,
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
     })),
   };
 }
 
+/**
+ * Knowledge Hub article structured data.
+ */
 export function articleSchema(opts: {
   title: string;
   description: string;
@@ -137,19 +264,47 @@ export function articleSchema(opts: {
   image: string;
   date: string;
 }) {
+  const url = absoluteUrl(opts.path);
+  const image = absoluteUrl(opts.image);
+
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+
     headline: opts.title,
     description: opts.description,
-    image: `${site.url}${opts.image}`,
+
+    image: [image],
+
     datePublished: opts.date,
-    author: { "@type": "Person", name: site.founder },
+
+    inLanguage: "en-CA",
+
+    url,
+
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+
+    author: {
+      "@type": "Person",
+      "@id": personId,
+      name: site.founder,
+      url: `${baseUrl}/about`,
+    },
+
     publisher: {
       "@type": "Organization",
+      "@id": businessId,
       name: site.name,
-      logo: { "@type": "ImageObject", url: `${site.url}${site.logo}` },
+      url: baseUrl,
+
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(site.logo),
+      },
     },
-    mainEntityOfPage: `${site.url}${opts.path}`,
   };
 }
