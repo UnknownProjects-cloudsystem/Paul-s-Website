@@ -6,14 +6,18 @@ import { servicePages } from "@/lib/services";
 const page = servicePages["service-therapy-dog-training"];
 
 export const metadata: Metadata = pageMeta({
-  title: page.seoTitle,
-  description: page.seoDescription,
+  title: "Service & Therapy Dog Training Ontario",
+  description:
+    "Professional service and therapy dog training focused on temperament, public-access manners, handler focus and dependable real-world behaviour.",
   path: "/service-therapy-dog-training",
   image: page.hero,
 });
 
 export default function ServiceTherapyDogTrainingPage() {
   return (
-    <ServicePageView page={page} ctaLabel="Request a Temperament Evaluation" />
+    <ServicePageView
+      page={page}
+      ctaLabel="Request a Temperament Evaluation"
+    />
   );
 }
