@@ -67,6 +67,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: site.founder,
+      url: `${site.url}/about`,
     },
   ],
 
@@ -81,6 +82,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -95,16 +97,29 @@ export const metadata: Metadata = {
     locale: "en_CA",
     url: site.url,
     siteName: site.name,
+
     title: `${site.name} | Dog Training Ontario`,
+
     description:
       "Professional dog training across Ontario backed by decades of real-world police K9 training experience.",
+
+    images: [
+      {
+        url: site.ogImage,
+        alt: `${site.name} — Professional Dog Training Ontario`,
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
+
     title: `${site.name} | Dog Training Ontario`,
+
     description:
       "Professional dog training across Ontario backed by decades of real-world police K9 training experience.",
+
+    images: [site.ogImage],
   },
 
   category: "Dog Training",
@@ -144,7 +159,7 @@ export default function RootLayout({
 
         <SmoothScroll />
 
-        <JsonLd data={localBusinessSchema} />
+        <JsonLd data={localBusinessSchema()} />
 
         <Navbar />
 
