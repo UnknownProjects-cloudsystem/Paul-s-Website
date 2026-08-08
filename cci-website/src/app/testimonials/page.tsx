@@ -8,9 +8,9 @@ import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMeta({
-  title: "Success Stories — Dog Training Results in Ontario",
+  title: "Dog Training Success Stories Ontario",
   description:
-    "Real results from Caissie Canine Instruction clients across Durham Region and the GTA — calmer dogs, confident owners and stronger relationships.",
+    "See real dog training results from Caissie Canine Instruction clients across Ontario, including calmer dogs, confident owners and stronger relationships.",
   path: "/testimonials",
 });
 
