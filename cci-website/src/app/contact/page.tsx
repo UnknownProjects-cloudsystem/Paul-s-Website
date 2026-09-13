@@ -9,11 +9,17 @@ import { pageMeta, breadcrumbSchema } from "@/lib/seo";
 import { site, serviceArea } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Book a Dog Training Assessment",
+  title: "Book a Dog Training Assessment in Ajax",
   description:
-    "Book a dog training assessment with Caissie Canine Instruction. Serving Durham Region, Toronto, the GTA and clients across Ontario.",
+    "Book a dog training assessment with Caissie Canine Instruction in Ajax, Ontario. Serving Durham Region, Toronto, the GTA and clients across Ontario.",
   path: "/contact",
 });
+
+const googleMapsUrl =
+  "https://maps.app.goo.gl/9PdQrb4FVvr43odB9";
+
+const googleMapsEmbedUrl =
+  "https://www.google.com/maps?q=Caissie%20Canine%20Instruction%2C%2077%20Mullen%20Dr%2C%20Ajax%2C%20ON%20L1T%202B2&output=embed";
 
 export default function ContactPage() {
   return (
@@ -25,6 +31,7 @@ export default function ContactPage() {
         ])}
       />
 
+      {/* Hero */}
       <section className="pt-32">
         <div className="container-cci">
           <Reveal className="max-w-3xl">
@@ -33,7 +40,9 @@ export default function ContactPage() {
               Contact · Training Assessment
             </span>
 
-            <h1 className="heading-xl mt-4">Tell Us About Your Dog</h1>
+            <h1 className="heading-xl mt-4">
+              Tell Us About Your Dog
+            </h1>
 
             <p className="body-lg mt-5">
               The more we know, the better we can help. Complete the assessment
@@ -44,10 +53,12 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Contact + Assessment */}
       <Section className="pt-12">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* Contact info */}
+          {/* Contact information */}
           <div className="space-y-5">
+            {/* Phone */}
             <a
               href={`tel:${site.phoneHref}`}
               className="card-surface flex items-center gap-4 p-5 transition-colors hover:border-gold/40"
@@ -67,16 +78,24 @@ export default function ContactPage() {
               </span>
             </a>
 
+            {/* Call / Text */}
             <div className="grid grid-cols-2 gap-3">
-              <a href={`tel:${site.phoneHref}`} className="btn-gold">
+              <a
+                href={`tel:${site.phoneHref}`}
+                className="btn-gold"
+              >
                 Call Now
               </a>
 
-              <a href={`sms:${site.phoneHref}`} className="btn-outline">
+              <a
+                href={`sms:${site.phoneHref}`}
+                className="btn-outline"
+              >
                 Text Us
               </a>
             </div>
 
+            {/* Email */}
             <a
               href={`mailto:${site.email}`}
               className="card-surface flex items-center gap-4 p-5 transition-colors hover:border-gold/40"
@@ -96,11 +115,15 @@ export default function ContactPage() {
               </span>
             </a>
 
+            {/* Service Area */}
             <section className="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-gunmetal/90 to-charcoal shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
               <div className="p-5 sm:p-6">
                 <span className="flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-label text-gold">
                   <span className="flex h-7 w-7 items-center justify-center rounded-md border border-gold/25 bg-gold/10">
-                    <Icon name="shield" className="h-4 w-4" />
+                    <Icon
+                      name="shield"
+                      className="h-4 w-4"
+                    />
                   </span>
 
                   Service Area
@@ -116,6 +139,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
+              {/* Coverage Types */}
               <div className="grid grid-cols-3 border-y border-white/10 bg-black/20">
                 {[
                   {
@@ -137,7 +161,9 @@ export default function ContactPage() {
                   <div
                     key={item.label}
                     className={`min-w-0 px-3 py-4 sm:px-4 ${
-                      index > 0 ? "border-l border-white/10" : ""
+                      index > 0
+                        ? "border-l border-white/10"
+                        : ""
                     }`}
                   >
                     <span className="block text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-gold">
@@ -155,6 +181,7 @@ export default function ContactPage() {
                 ))}
               </div>
 
+              {/* Communities */}
               <div className="p-5 sm:p-6">
                 <h3 className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-fog">
                   Popular In-Person Communities
@@ -167,7 +194,10 @@ export default function ContactPage() {
                       className="flex min-w-0 items-center gap-2 text-[0.68rem] text-silver sm:text-xs"
                     >
                       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold/80" />
-                      <span className="truncate">{city}</span>
+
+                      <span className="truncate">
+                        {city}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -178,6 +208,7 @@ export default function ContactPage() {
                       name="consult"
                       className="h-3.5 w-3.5 shrink-0 text-gold"
                     />
+
                     Ask about virtual training anywhere in Canada.
                   </span>
 
@@ -192,11 +223,133 @@ export default function ContactPage() {
             </section>
           </div>
 
-          {/* Form */}
+          {/* Assessment Form */}
           <Reveal>
             <AssessmentForm />
           </Reveal>
         </div>
+      </Section>
+
+      {/* ================================================= */}
+      {/* AJAX LOCATION + GOOGLE MAP */}
+      {/* ================================================= */}
+
+      <Section className="pt-4 pb-20">
+        <Reveal>
+          <section className="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-gunmetal/90 to-charcoal shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+
+              {/* Location Information */}
+              <div className="p-6 sm:p-8 lg:p-10">
+
+                {/* Eyebrow */}
+                <span className="flex items-center gap-3 text-[0.65rem] font-semibold uppercase tracking-label text-gold">
+                  <span className="h-px w-6 bg-gold" />
+                  Ajax · Durham Region
+                </span>
+
+                {/* Local SEO Heading */}
+                <h2 className="mt-4 font-display text-3xl font-semibold uppercase leading-tight text-soft-white sm:text-4xl">
+                  Dog Training in Ajax, Ontario
+                </h2>
+
+                {/* Description */}
+                <p className="mt-5 max-w-xl text-sm leading-relaxed text-silver sm:text-base">
+                  Caissie Canine Instruction is based in Ajax, Ontario and
+                  provides professional dog training throughout Ajax, Whitby,
+                  Pickering, Oshawa, Durham Region and surrounding communities.
+                </p>
+
+                {/* Business Details */}
+                <div className="mt-8 space-y-5">
+
+                  {/* Address */}
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold">
+                      <Icon name="patrol" />
+                    </span>
+
+                    <div>
+                      <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-fog">
+                        Ajax Location
+                      </span>
+
+                      <p className="mt-1 font-medium leading-relaxed text-soft-white">
+                        77 Mullen Dr
+                        <br />
+                        Ajax, ON L1T 2B2
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold">
+                      <Icon name="consult" />
+                    </span>
+
+                    <div>
+                      <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-fog">
+                        Contact
+                      </span>
+
+                      <a
+                        href={`tel:${site.phoneHref}`}
+                        className="mt-1 inline-block font-medium text-soft-white transition-colors hover:text-gold"
+                      >
+                        {site.phone}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Buttons */}
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+
+                  {/* Exact CCI Google Maps Listing */}
+                  <a
+                    href={googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Caissie Canine Instruction on Google Maps"
+                    className="btn-gold"
+                  >
+                    Get Directions
+                  </a>
+
+                  <Link
+                    href="/service-areas"
+                    className="btn-outline"
+                  >
+                    View Service Areas
+                  </Link>
+                </div>
+
+                {/* Supporting Location Copy */}
+                <p className="mt-6 max-w-lg text-xs leading-relaxed text-fog">
+                  Professional dog training serving Ajax, Whitby, Pickering,
+                  Oshawa, Durham Region, Toronto, the GTA and communities
+                  throughout Ontario.
+                </p>
+              </div>
+
+              {/* Google Map */}
+              <div className="relative min-h-[380px] border-t border-white/10 bg-black/20 lg:min-h-[520px] lg:border-l lg:border-t-0">
+                <iframe
+                  title="Caissie Canine Instruction - Dog Training in Ajax Ontario"
+                  src={googleMapsEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0 h-full min-h-[380px] w-full lg:min-h-[520px]"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </section>
+        </Reveal>
       </Section>
     </>
   );
