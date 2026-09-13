@@ -274,11 +274,11 @@ export default function ContactPage() {
                         Ajax Location
                       </span>
 
-                      <p className="mt-1 font-medium leading-relaxed text-soft-white">
-                        77 Mullen Dr
-                        <br />
-                        Ajax, ON L1T 2B2
-                      </p>
+                     <p className="mt-1 font-medium leading-relaxed text-soft-white">
+                      {site.address.street}
+                      <br />
+                      {site.address.city}, {site.address.provinceCode} {site.address.postalCode}
+                    </p>
                     </div>
                   </div>
 
@@ -308,11 +308,10 @@ export default function ContactPage() {
 
                   {/* Exact CCI Google Maps Listing */}
                   <a
-                    href={googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Caissie Canine Instruction on Google Maps"
-                    className="btn-gold"
+                  href={site.maps.google}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold"
                   >
                     Get Directions
                   </a>
@@ -337,14 +336,14 @@ export default function ContactPage() {
               <div className="relative min-h-[380px] border-t border-white/10 bg-black/20 lg:min-h-[520px] lg:border-l lg:border-t-0">
                 <iframe
                   title="Caissie Canine Instruction - Dog Training in Ajax Ontario"
-                  src={googleMapsEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  className="absolute inset-0 h-full min-h-[380px] w-full lg:min-h-[520px]"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
+                   src={site.maps.embed}
+                    width="100%"
+                    height="100%"
+                    className="absolute inset-0 h-full min-h-[380px] w-full lg:min-h-[520px]"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>
