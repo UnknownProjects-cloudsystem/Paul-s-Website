@@ -27,6 +27,26 @@ export const site = {
   phone: "905 427 4142",
   phoneHref: "+19054274142",
 
+  address: {
+    street: "77 Mullen Dr",
+    city: "Ajax",
+    province: "Ontario",
+    provinceCode: "ON",
+    postalCode: "L1T 2B2",
+    country: "Canada",
+    countryCode: "CA",
+
+    full: "77 Mullen Dr, Ajax, ON L1T 2B2",
+  },
+
+  maps: {
+    google:
+      "https://maps.app.goo.gl/9PdQrb4FVvr43odB9",
+
+    embed:
+      "https://www.google.com/maps?q=Caissie%20Canine%20Instruction%2C%2077%20Mullen%20Dr%2C%20Ajax%2C%20ON%20L1T%202B2&output=embed",
+  },
+
   logo: "/assets/caissie/logo/cci-logo.avif",
 
   ogImage: "/assets/caissie/paul/paul-3.webp",
@@ -42,6 +62,7 @@ export const site = {
   sameAs: [
     "https://www.instagram.com/caissiecanineinstruction/",
     "https://www.facebook.com/CaissieCanineInstruction/",
+    "https://maps.app.goo.gl/9PdQrb4FVvr43odB9",
   ],
 } as const;
 
